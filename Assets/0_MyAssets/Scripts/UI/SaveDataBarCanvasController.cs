@@ -47,7 +47,7 @@ public class SaveDataBarCanvasController : MonoBehaviour
         }
     }
 
-    List<SaveDataBarController> saveDataBars = new List<SaveDataBarController>();
+    [HideInInspector] public List<SaveDataBarController> saveDataBars = new List<SaveDataBarController>();
     bool showBars = true;
     //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     void Awake()
@@ -153,7 +153,7 @@ public class SaveDataBarCanvasController : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"FailedToLoad: Failed to load {saveDataMode} because the property {saveDataMode} does not exist.");
+            Debug.LogWarning($"FailedToLoad: Failed to load {saveDataMode} because the property {saveDataMode} does not exist.");
         }
     }
 }

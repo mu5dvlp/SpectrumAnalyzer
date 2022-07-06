@@ -12,14 +12,23 @@ public enum AnalyzeMode
 public class InputSoundManager : MonoBehaviour
 {
     public static InputSoundManager i;
+
+    [Header("入力設定")]
     [SerializeField] AudioClip audioClip;
 
-    [Space(20)]
+    [Space(10)]
     [SerializeField] AnalyzeMode analyzeMode = AnalyzeMode.Microphone;
 
-    [Space(20)]
+    [Header("出力設定")]
+    [Space(10)]
+    [Header("ベロシティ")]
     [SerializeField] float spectrumMagnification = 1;
-    [SerializeField][Header("表示範囲")][MinMaxSlider(0, 1)] Vector2 range = new Vector2(0, 1);
+    [Space(10)]
+    [Header("表示範囲")]
+    [SerializeField][MinMaxSlider(0, 1)] Vector2 range = new Vector2(0, 1);
+    [Space(10)]
+    [Header("ボイチェンミックス")]
+    [SerializeField, Range(0f, 1f)] float filterMix;
 
     AudioSource audioSource;
     [HideInInspector] public float[] spectrum;
@@ -48,6 +57,15 @@ public class InputSoundManager : MonoBehaviour
     void Update()
     {
         AudioListener.GetSpectrumData(spectrum, 0, FFTWindow.Rectangular);
+        MinMaxTrimming();
+        ApplyVoiceEffect();
+
+        BarCanvasController.i.ChangeBarLength(spectrum);
+    }
+
+    //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+    void MinMaxTrimming()
+    {
         for (int i = 0; i < spectrum.Length; i++)
         {
             spectrum[i] *= spectrumMagnification;
@@ -58,10 +76,16 @@ public class InputSoundManager : MonoBehaviour
                 spectrum[i] = range.y;
             }
         }
-        BarCanvasController.i.ChangeBarLength(spectrum);
     }
 
-    //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+    void ApplyVoiceEffect()
+    {
+        for (int i = 0; i < spectrum.Length || i < SaveDataBarCanvasController.i.saveDataBars.Count; i++)
+        {
+            //spectrum[i] = spectrum[i] * (1 - filterMix) + SaveDataBarCanvasController.i.saveDataBars[i].Value * filterMix;
+        }
+    }
+
     public float GetVelocity()
     {
         float max = spectrum[0];
