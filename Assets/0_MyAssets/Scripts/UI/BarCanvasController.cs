@@ -150,50 +150,7 @@ public class BarCanvasController : MonoBehaviour
 
     public void ChangeBarLength(float[] spectrum)
     {
-        if (CanvasManager.i.useSmoothing) ChangeBarLength_smoothing(spectrum);
-        else ChangeBarLength_normal(spectrum);
-    }
-
-    void ChangeBarLength_smoothing(float[] spectrum)
-    {
-        if (samples.Count >= CanvasManager.i.smoothingSampleCount) samples.RemoveAt(0);
-        var sample = new SpectrumSampleData(spectrum);
-        if (sample.amount > CanvasManager.i.smoothingSampleThreshold) samples.Add(sample);
-
-        float[] smoothSpectrum = GetSmoothSpectrum();
-
-        if (displayMode == DisplayMode.Full)
-        {
-            for (int i = 0; i < (int)barCount; i++)
-            {
-                bars[i].ChangeLength(smoothSpectrum[i]);
-            }
-        }
-        else
-        {
-            for (int i = 0; i < limitedBarCount; i++)
-            {
-                bars[i].ChangeLength(smoothSpectrum[i]);
-            }
-        }
-    }
-
-    float[] GetSmoothSpectrum()
-    {
-        if (samples.Count == 0) return new float[8192];
-
-        float[] smoothSpectrum = new float[samples[0].spectrum.Length];
-        for (int i = 0; i < samples[0].spectrum.Length; i++)
-        {
-            float sum = 0;
-            foreach (var sample in samples)
-            {
-                sum += sample.spectrum[i];// * sample.amount;
-            }
-            sum /= samples.Count;
-            smoothSpectrum[i] = sum;
-        }
-        return smoothSpectrum;
+        ChangeBarLength_normal(spectrum);
     }
 
     void ChangeBarLength_normal(float[] spectrum)
