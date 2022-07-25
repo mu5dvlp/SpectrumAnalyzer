@@ -26,9 +26,6 @@ public class InputSoundManager : MonoBehaviour
     [Space(10)]
     [Header("表示範囲")]
     [SerializeField][MinMaxSlider(0, 1)] Vector2 range = new Vector2(0, 1);
-    [Space(10)]
-    [Header("ボイチェンミックス")]
-    [SerializeField, Range(0f, 1f)] float filterMix;
 
     AudioSource audioSource;
     [HideInInspector] public float[] spectrum;

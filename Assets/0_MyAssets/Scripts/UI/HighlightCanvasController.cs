@@ -56,6 +56,7 @@ public class HighlightCanvasController : MonoBehaviour
 
     void Move_averageHighlightBar()
     {
+        if (!CanvasManager.i.showAverageCanvas) return;
         if (AverageCanvasController.i.MaxBar.Value < range_average.x || range_average.y < AverageCanvasController.i.MaxBar.Value) return;
 
         Vector2 pos = averageHighlightBar_img.transform.position;

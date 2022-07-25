@@ -17,9 +17,14 @@ public class CanvasManager : MonoBehaviour
     public DisplayMode displayMode = DisplayMode.Full;
     public int limitedBarCount = 100;
     public float barSpan = 10;
+    [Space(10)]
+    public bool useSmoothing = false;
+    [Min(1)] public int smoothingSampleCount = 5;
+    public float smoothingSampleThreshold = 1;
 
     [Space(20)]
     [Header("平均のバー 設定")]
+    public bool showAverageCanvas = true;
     public float averageSumThreshold = 1;
     public float averageBarMaginification = 1;
 

@@ -59,6 +59,8 @@ public class AverageCanvasController : MonoBehaviour
 
     void Start()
     {
+        if (!CanvasManager.i.showAverageCanvas) return;
+
         if (BarCanvasController.i.displayMode == DisplayMode.Full) spectrum_ave = new float[(int)BarCanvasController.i.barCount];
         else if (BarCanvasController.i.displayMode == DisplayMode.Limit) spectrum_ave = new float[8192];
 
@@ -95,6 +97,7 @@ public class AverageCanvasController : MonoBehaviour
 
     void Analyze()
     {
+        if (!CanvasManager.i.showAverageCanvas) return;
         if (BarCanvasController.i.BarSum < averageSumThreshold) return;
 
         for (int i = 0; i < averageBars.Count; i++)
