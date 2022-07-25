@@ -22,7 +22,7 @@ public class InputSoundManager : MonoBehaviour
     [Header("出力設定")]
     [Space(10)]
     [Header("ベロシティ")]
-    [SerializeField] float spectrumMagnification = 1;
+    [SerializeField, Range(0, 100)] float spectrumMagnification = 1;
     [Space(10)]
     [Header("表示範囲")]
     [SerializeField][MinMaxSlider(0, 1)] Vector2 range = new Vector2(0, 1);
