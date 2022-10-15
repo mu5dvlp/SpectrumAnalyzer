@@ -67,6 +67,5 @@ public class RealCursor : CursorBase, IRepositionable, IMovable
             transform.position = pos;
             InputManager.i.OnPointerDownEvent();
         }
-
     }
 }
