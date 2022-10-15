@@ -8,6 +8,10 @@ public class DummyCursor : CursorBase, IRepositionable, IMovable
     [HideInInspector] public Vector2 direction;
 
     //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+    void Awake()
+    {
+
+    }
     void Start()
     {
 
@@ -15,17 +19,18 @@ public class DummyCursor : CursorBase, IRepositionable, IMovable
 
     void Update()
     {
-
+        Move();
+        Reposition();
     }
 
     //<interface Methods>ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     public void Reposition()
     {
-
+        
     }
 
     public void Move()
     {
-
+        if (!InputManager.i.IsMoving) return;
     }
 }

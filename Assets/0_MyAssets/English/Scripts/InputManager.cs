@@ -14,10 +14,28 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    //ーーーーーーーーーーーーーーーーーーーーー
     [SerializeField] RealCursor realCursor;
 
+    [Space(10)]
+    [SerializeField] float moveDistanceThreshold = 0.1f;
+
+    //ーーーーーーーーーーーーーーーーーーーーー
     [HideInInspector] public bool isTouching = false;
+    public bool IsMoving
+    {
+        get
+        {
+            if (!isTouching) return false;
+
+            float distance = Vector2.Distance((Vector2)Input.mousePosition, pos_previous);
+            if (distance > moveDistanceThreshold) return true;
+            else return false;
+        }
+    }
+
     Vector2 pos_touchStart;
+    Vector2 pos_previous;
     public Vector2 DifferenceFromTouchStart
     {
         get
@@ -42,6 +60,11 @@ public class InputManager : MonoBehaviour
 
     }
 
+    void LateUpdate()
+    {
+        pos_previous = Input.mousePosition;
+    }
+
     //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     public void OnPointerDownEvent()
     {
@@ -54,5 +77,6 @@ public class InputManager : MonoBehaviour
     public void OnPointerUpEvent()
     {
         isTouching = false;
+        pos_touchStart = Input.mousePosition;
     }
 }

@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CursorBase : MonoBehaviour
 {
-    float m_circleRadius = 75;
+    RectTransform rectTransform { get { return GetComponent<RectTransform>(); } }
+    public Image cursor_img;
 }
 
 //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-interface IRepositionable
-{
-    public void Reposition();
-}
-
 interface IMovable
 {
     public void Move();
+}
+
+interface IRepositionable
+{
+    public void Reposition();
 }
