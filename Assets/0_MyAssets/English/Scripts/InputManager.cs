@@ -50,16 +50,6 @@ public class InputManager : MonoBehaviour
         _inputManager = this;
     }
 
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
-
     void LateUpdate()
     {
         pos_previous = Input.mousePosition;

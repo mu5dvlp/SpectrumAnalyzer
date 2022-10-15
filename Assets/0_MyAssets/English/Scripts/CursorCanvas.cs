@@ -27,7 +27,8 @@ public class CursorCanvas : MonoBehaviour
     public float region_maxX { get { return mask.rectTransform.position.x + mask.rectTransform.sizeDelta.x / 2; } }
     public float region_maxY { get { return mask.rectTransform.position.y + mask.rectTransform.sizeDelta.y / 2; } }
 
-    List<DummyCursor> dummyCursors = new List<DummyCursor>();
+    [Space(20)]
+    public List<DummyCursor> dummyCursors = new List<DummyCursor>();
 
     float tapStartTime_sec;
     bool wasStartedTap = false;
@@ -50,39 +51,36 @@ public class CursorCanvas : MonoBehaviour
 
     void Update()
     {
-
+        TapTimeUpdate();
+        CheckOpenAnswer();
     }
 
     //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     public void OnPointerDownEvent()
     {
         wasStartedTap = true;
+        tapCount++;
         CheckOpenAnswer();
+    }
+
+    void TapTimeUpdate()
+    {
+        if (wasStartedTap) return;
+
+        tapStartTime_sec = Time.time;
     }
 
     void CheckOpenAnswer()
     {
-        if (wasStartedTap)
+        Debug.Log($"{tapCount} != {necessaryOpenAnswerTapCount} : {tapCount != necessaryOpenAnswerTapCount}");
+        if (Time.time - tapStartTime_sec < openAnswerTime_sec)
         {
-            if (Time.time - tapStartTime_sec < openAnswerTime_sec)
-            {
-                tapCount++;
-                if (tapCount != necessaryOpenAnswerTapCount) return;
+            if (tapCount != necessaryOpenAnswerTapCount) return;
 
-                ChangeDummyCursorVisible();
-                tapCount = 0;
-            }
-            else
-            {
-                tapStartTime_sec = Time.time;
-                tapCount = 0;
-                wasStartedTap = false;
-            }
+            ChangeDummyCursorVisible();
+            ResetTapCount();
         }
-        else
-        {
-            tapStartTime_sec = Time.time;
-        }
+        else ResetTapCount();
     }
 
     void ChangeDummyCursorVisible()
@@ -90,7 +88,15 @@ public class CursorCanvas : MonoBehaviour
         foreach (var dummyCursor in dummyCursors)
         {
             dummyCursor.gameObject.SetActive(!dummyCursor.gameObject.activeSelf);
+            Debug.Log(dummyCursor.gameObject.activeSelf);
         }
+    }
+
+    void ResetTapCount()
+    {
+        tapStartTime_sec = Time.time;
+        tapCount = 0;
+        wasStartedTap = false;
     }
 
     //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
