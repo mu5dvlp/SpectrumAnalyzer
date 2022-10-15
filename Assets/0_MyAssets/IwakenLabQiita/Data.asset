@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a9393c92af0e4109a366059c797ddfd, type: 3}
+  m_Name: Data
+  m_EditorClassIdentifier: 
+  nodeData_list:
+  - uid: d623w1502kqnm17x
+    nodeType_str: MU5Editor.NodeEditor.EntryNode
+    localBound:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 76
+      height: 77
+  - uid: radvg42zsr6el5ni
+    nodeType_str: MU5Editor.NodeEditor.ExitNode
+    localBound:
+      serializedVersion: 2
+      x: 580
+      y: 0
+      width: 67.5
+      height: 77
+  - uid: hr1nwdpnlbjcy13p
+    nodeType_str: MU5Editor.NodeEditor.SampleNode
+    localBound:
+      serializedVersion: 2
+      x: 223
+      y: 77
+      width: 113
+      height: 125
+  edgeData_list:
+  - uid_outputNode: d623w1502kqnm17x
+    uid_outputPort: 500100
+    uid_inputNode: hr1nwdpnlbjcy13p
+    uid_inputPort: 000100
+  - uid_outputNode: hr1nwdpnlbjcy13p
+    uid_outputPort: 500300
+    uid_inputNode: radvg42zsr6el5ni
+    uid_inputPort: 000100
