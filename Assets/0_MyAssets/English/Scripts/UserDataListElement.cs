@@ -14,17 +14,6 @@ public class UserDataListElement : MonoBehaviour
     [HideInInspector] public bool answer;
 
     //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
-
-    //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     public void Initialize(Transform _parent, EnglishReportData data)
     {
         transform.SetParent(_parent);

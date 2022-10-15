@@ -106,13 +106,4 @@ public class CursorCanvas : MonoBehaviour
         tapCount = 0;
         wasStartedTap = false;
     }
-
-    //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-    [ContextMenu("test")]
-    public void Test()
-    {
-        // Debug.Log($"{region_minX}, {region_minY}, {region_maxX}, {region_maxY}");
-        Debug.Log($"OK");
-
-    }
 }
