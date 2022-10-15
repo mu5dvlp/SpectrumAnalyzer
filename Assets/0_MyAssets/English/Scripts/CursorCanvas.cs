@@ -16,7 +16,6 @@ public class CursorCanvas : MonoBehaviour
     }
     //ーーーーーーーーーーーーーーーーーーーーー
     [SerializeField] RectMask2D mask;
-    [SerializeField] AnimationClip anim;
 
     [Space(20)]
     [SerializeField] float openAnswerTime_sec = 0.5f;
@@ -28,6 +27,7 @@ public class CursorCanvas : MonoBehaviour
     public float region_maxY { get { return mask.rectTransform.position.y + mask.rectTransform.sizeDelta.y / 2; } }
 
     [Space(20)]
+    public RealCursor realCursor;
     public List<DummyCursor> dummyCursors = new List<DummyCursor>();
 
     float tapStartTime_sec;
@@ -43,9 +43,10 @@ public class CursorCanvas : MonoBehaviour
 
     void Start()
     {
-        foreach (Transform child in transform)
+        realCursor.transform.position = GetRandomCursorPosition();
+        foreach (var dummyCursor in dummyCursors)
         {
-            if (TryGetComponent(out DummyCursor dummyCursor)) dummyCursors.Add(dummyCursor);
+            dummyCursor.transform.position = GetRandomCursorPosition();
         }
     }
 
@@ -56,6 +57,14 @@ public class CursorCanvas : MonoBehaviour
     }
 
     //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+    Vector2 GetRandomCursorPosition()
+    {
+        Vector2 pos = new Vector2();
+        pos.x = Random.Range(region_minX - realCursor.cursor_img.rectTransform.sizeDelta.x / 2, region_maxX + realCursor.cursor_img.rectTransform.sizeDelta.x / 2);
+        pos.y = Random.Range(region_minY - realCursor.cursor_img.rectTransform.sizeDelta.y / 2, region_maxY + realCursor.cursor_img.rectTransform.sizeDelta.y / 2);
+        return pos;
+    }
+
     public void OnPointerDownEvent()
     {
         wasStartedTap = true;
@@ -88,7 +97,6 @@ public class CursorCanvas : MonoBehaviour
         foreach (var dummyCursor in dummyCursors)
         {
             dummyCursor.gameObject.SetActive(!dummyCursor.gameObject.activeSelf);
-            Debug.Log(dummyCursor.gameObject.activeSelf);
         }
     }
 

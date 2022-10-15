@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CursorBase : MonoBehaviour
+public abstract class CursorBase : MonoBehaviour
 {
     RectTransform rectTransform { get { return GetComponent<RectTransform>(); } }
     public Image cursor_img;
