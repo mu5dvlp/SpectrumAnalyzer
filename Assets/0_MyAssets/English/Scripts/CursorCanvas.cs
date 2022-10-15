@@ -18,12 +18,21 @@ public class CursorCanvas : MonoBehaviour
     [SerializeField] RectMask2D mask;
     [SerializeField] AnimationClip anim;
 
+    [Space(20)]
+    [SerializeField] float openAnswerTime_sec = 0.5f;
+    [SerializeField] int necessaryOpenAnswerTapCount = 3;
+
     public float region_minX { get { return mask.rectTransform.position.x - mask.rectTransform.sizeDelta.x / 2; } }
     public float region_minY { get { return mask.rectTransform.position.y - mask.rectTransform.sizeDelta.y / 2; } }
     public float region_maxX { get { return mask.rectTransform.position.x + mask.rectTransform.sizeDelta.x / 2; } }
     public float region_maxY { get { return mask.rectTransform.position.y + mask.rectTransform.sizeDelta.y / 2; } }
 
     List<DummyCursor> dummyCursors = new List<DummyCursor>();
+
+    float tapStartTime_sec;
+    bool wasStartedTap = false;
+    int tapCount = 0;
+    bool isOpened = false;
 
     //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     void Awake()
@@ -33,7 +42,10 @@ public class CursorCanvas : MonoBehaviour
 
     void Start()
     {
-
+        foreach (Transform child in transform)
+        {
+            if (TryGetComponent(out DummyCursor dummyCursor)) dummyCursors.Add(dummyCursor);
+        }
     }
 
     void Update()
@@ -42,10 +54,51 @@ public class CursorCanvas : MonoBehaviour
     }
 
     //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+    public void OnPointerDownEvent()
+    {
+        wasStartedTap = true;
+        CheckOpenAnswer();
+    }
+
+    void CheckOpenAnswer()
+    {
+        if (wasStartedTap)
+        {
+            if (Time.time - tapStartTime_sec < openAnswerTime_sec)
+            {
+                tapCount++;
+                if (tapCount != necessaryOpenAnswerTapCount) return;
+
+                ChangeDummyCursorVisible();
+                tapCount = 0;
+            }
+            else
+            {
+                tapStartTime_sec = Time.time;
+                tapCount = 0;
+                wasStartedTap = false;
+            }
+        }
+        else
+        {
+            tapStartTime_sec = Time.time;
+        }
+    }
+
+    void ChangeDummyCursorVisible()
+    {
+        foreach (var dummyCursor in dummyCursors)
+        {
+            dummyCursor.gameObject.SetActive(!dummyCursor.gameObject.activeSelf);
+        }
+    }
+
+    //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     [ContextMenu("test")]
     public void Test()
     {
         // Debug.Log($"{region_minX}, {region_minY}, {region_maxX}, {region_maxY}");
+        Debug.Log($"OK");
 
     }
 }

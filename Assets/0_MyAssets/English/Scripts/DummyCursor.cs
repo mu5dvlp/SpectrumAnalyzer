@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DummyCursor : CursorBase, IRepositionable, IMovable
 {
-    [SerializeField] float magnitude = 50;
+    [SerializeField] Vector2 magnitude_range = new Vector2(10, 70);
+    float magnitude = 50;
 
     Animator animator;
     [HideInInspector] public Vector2 direction;
@@ -20,7 +21,7 @@ public class DummyCursor : CursorBase, IRepositionable, IMovable
 
     void Start()
     {
-
+        magnitude = Random.Range(magnitude_range.x, magnitude_range.y);
     }
 
     void Update()
@@ -39,7 +40,7 @@ public class DummyCursor : CursorBase, IRepositionable, IMovable
         }
         else
         {
-            animator.SetInteger(number_hash, (int)Random.Range(0, 3));
+            animator.SetInteger(number_hash, (int)Random.Range(0, 4));
             animator.SetBool(isMoving_hash, true);
             transform.position += (Vector3)(direction * magnitude);
         }
