@@ -16,11 +16,14 @@ public class CursorCanvas : MonoBehaviour
     }
     //ーーーーーーーーーーーーーーーーーーーーー
     [SerializeField] RectMask2D mask;
+    [SerializeField] AnimationClip anim;
 
     public float region_minX { get { return mask.rectTransform.position.x - mask.rectTransform.sizeDelta.x / 2; } }
     public float region_minY { get { return mask.rectTransform.position.y - mask.rectTransform.sizeDelta.y / 2; } }
     public float region_maxX { get { return mask.rectTransform.position.x + mask.rectTransform.sizeDelta.x / 2; } }
     public float region_maxY { get { return mask.rectTransform.position.y + mask.rectTransform.sizeDelta.y / 2; } }
+
+    List<DummyCursor> dummyCursors = new List<DummyCursor>();
 
     //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     void Awake()
@@ -43,5 +46,6 @@ public class CursorCanvas : MonoBehaviour
     public void Test()
     {
         // Debug.Log($"{region_minX}, {region_minY}, {region_maxX}, {region_maxY}");
+
     }
 }

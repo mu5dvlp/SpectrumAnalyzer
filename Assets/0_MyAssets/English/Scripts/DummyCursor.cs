@@ -9,11 +9,15 @@ public class DummyCursor : CursorBase, IRepositionable, IMovable
     Animator animator;
     [HideInInspector] public Vector2 direction;
 
+    int number_hash = Animator.StringToHash("Number");
+    int isMoving_hash = Animator.StringToHash("IsMoving");
+
     //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     void Awake()
     {
-
+        animator = GetComponent<Animator>();
     }
+
     void Start()
     {
 
@@ -28,10 +32,17 @@ public class DummyCursor : CursorBase, IRepositionable, IMovable
     //<interface Methods>ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     public void Move()
     {
-        if (!InputManager.i.IsMoving) return;
-
-        transform.position += (Vector3)(direction * magnitude);
-        Debug.Log(transform.position);
+        if (!InputManager.i.IsMoving)
+        {
+            animator.SetBool(isMoving_hash, false);
+            return;
+        }
+        else
+        {
+            animator.SetInteger(number_hash, (int)Random.Range(0, 3));
+            animator.SetBool(isMoving_hash, true);
+            transform.position += (Vector3)(direction * magnitude);
+        }
     }
 
     public void Reposition()
