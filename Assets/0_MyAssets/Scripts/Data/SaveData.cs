@@ -49,6 +49,8 @@ public class SaveData : ISerializationCallbackReceiver
     public float[] spectrum_SunaoHashimoto = new float[8192];
     public float[] spectrum_Free = new float[8192];
 
+    public List<EnglishReportData> englishReportDatas = new List<EnglishReportData>();
+
     //=================================================================================
     //シリアライズ,デシリアライズ時のコールバック
     //=================================================================================

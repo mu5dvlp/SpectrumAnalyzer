@@ -72,12 +72,12 @@ public class CursorCanvas : MonoBehaviour
 
     void CheckOpenAnswer()
     {
-        Debug.Log($"{tapCount} != {necessaryOpenAnswerTapCount} : {tapCount != necessaryOpenAnswerTapCount}");
         if (Time.time - tapStartTime_sec < openAnswerTime_sec)
         {
             if (tapCount != necessaryOpenAnswerTapCount) return;
 
             ChangeDummyCursorVisible();
+            DebugCanvas.i.StopTimer();
             ResetTapCount();
         }
         else ResetTapCount();
