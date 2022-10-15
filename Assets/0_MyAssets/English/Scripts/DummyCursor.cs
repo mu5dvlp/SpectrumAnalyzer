@@ -12,6 +12,7 @@ public class DummyCursor : CursorBase, IRepositionable, IMovable
 
     int number_hash = Animator.StringToHash("Number");
     int isMoving_hash = Animator.StringToHash("IsMoving");
+    int offsetTimeSec_has = Animator.StringToHash("OffsetTimeSec");
 
     //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     void Awake()
@@ -22,6 +23,7 @@ public class DummyCursor : CursorBase, IRepositionable, IMovable
     void Start()
     {
         magnitude = Random.Range(magnitude_range.x, magnitude_range.y);
+        animator.SetFloat(offsetTimeSec_has, Random.Range(0f, 1f));
     }
 
     void Update()
