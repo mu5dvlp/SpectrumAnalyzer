@@ -106,4 +106,11 @@ public class CursorCanvas : MonoBehaviour
         tapCount = 0;
         wasStartedTap = false;
     }
+
+    [ContextMenu("test")]
+    public void Test()
+    {
+        Debug.Log($"{mask.transform.position} {mask.transform.localPosition} {mask.rectTransform.position}, {mask.rectTransform.localPosition}");
+        Debug.Log($"{region_minX}~{region_maxX}, {region_minY}~{region_maxY}");
+    }
 }
