@@ -23,7 +23,7 @@ public class DummyCursor : CursorBase, IRepositionable, IMovable
     void Start()
     {
         magnitude = Random.Range(magnitude_range.x, magnitude_range.y);
-        animator.SetFloat(offsetTimeSec_has, Random.Range(0f, 1f));
+        animator.SetFloat(offsetTimeSec_has, Random.Range(0f, 1.0f));
     }
 
     void Update()
