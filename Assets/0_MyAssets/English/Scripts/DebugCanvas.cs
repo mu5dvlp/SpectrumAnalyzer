@@ -24,6 +24,7 @@ public class DebugCanvas : MonoBehaviour
     float finishTime_sec;
     bool finishExperiment = false;
     [HideInInspector] public float FoundTimeSec { get { return finishTime_sec - startTime_sec; } }
+    int claerCount = 0;
     //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     void Start()
     {
@@ -34,11 +35,11 @@ public class DebugCanvas : MonoBehaviour
     void Update()
     {
 #if UNITY_EDITOR
-        // isBtnPushed_array[0] = Input.GetKey(KeyCode.Alpha1);
-        // isBtnPushed_array[1] = Input.GetKey(KeyCode.Alpha2);
-        // isBtnPushed_array[2] = Input.GetKey(KeyCode.Alpha3);
-        // isBtnPushed_array[3] = Input.GetKey(KeyCode.Alpha4);
-        // CheckOpenDebug();
+        isBtnPushed_array[0] = Input.GetKey(KeyCode.Alpha1);
+        isBtnPushed_array[1] = Input.GetKey(KeyCode.Alpha2);
+        isBtnPushed_array[2] = Input.GetKey(KeyCode.Alpha3);
+        isBtnPushed_array[3] = Input.GetKey(KeyCode.Alpha4);
+        CheckOpenDebug();
 #endif
     }
 
@@ -89,6 +90,15 @@ public class DebugCanvas : MonoBehaviour
         SaveData.Instance.Save();
     }
 
+    public void OnBtnPush_debug_ClearData()
+    {
+        claerCount++;
+        if (claerCount < 3) return;
+
+        SaveData.Instance.englishReportDatas.Clear();
+        SaveData.Instance.Save();
+    }
+
     //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     void Init_DataList()
     {
@@ -114,13 +124,6 @@ public class DebugCanvas : MonoBehaviour
         if (finishExperiment) return;
         finishTime_sec = Time.time;
         finishExperiment = true;
-    }
-
-    [ContextMenu("ClearEnglishReportData")]
-    public void ClearEnglishReportData()
-    {
-        SaveData.Instance.englishReportDatas.Clear();
-        SaveData.Instance.Save();
     }
 }
 
