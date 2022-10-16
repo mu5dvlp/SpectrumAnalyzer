@@ -39,31 +39,31 @@ public class RealCursor : CursorBase, IRepositionable, IMovable
 
     public void Reposition()
     {
-        if (transform.position.x + cursor_img.rectTransform.sizeDelta.x / 2 < CursorCanvas.i.region_minX)
+        if (transform.position.x + cursor_img.rectTransform.sizeDelta.x / 2 < 0)
         {
             Vector2 pos = transform.position;
-            pos.x = CursorCanvas.i.region_maxX + cursor_img.rectTransform.sizeDelta.x / 2;
+            pos.x = Screen.width + cursor_img.rectTransform.sizeDelta.x / 2;
             transform.position = pos;
             InputManager.i.OnPointerDownEvent();
         }
-        if (transform.position.y + cursor_img.rectTransform.sizeDelta.y / 2 < CursorCanvas.i.region_minY)
+        if (transform.position.y + cursor_img.rectTransform.sizeDelta.y / 2 < Screen.height - Screen.width)
         {
             Vector2 pos = transform.position;
-            pos.y = CursorCanvas.i.region_maxY + cursor_img.rectTransform.sizeDelta.y / 2;
+            pos.y = Screen.height + cursor_img.rectTransform.sizeDelta.y / 2;
             transform.position = pos;
             InputManager.i.OnPointerDownEvent();
         }
-        if (transform.position.x - cursor_img.rectTransform.sizeDelta.x / 2 > CursorCanvas.i.region_maxX)
+        if (transform.position.x - cursor_img.rectTransform.sizeDelta.x / 2 > Screen.width)
         {
             Vector2 pos = transform.position;
-            pos.x = CursorCanvas.i.region_minX - cursor_img.rectTransform.sizeDelta.x / 2;
+            pos.x = -cursor_img.rectTransform.sizeDelta.x / 2;
             transform.position = pos;
             InputManager.i.OnPointerDownEvent();
         }
-        if (transform.position.y - cursor_img.rectTransform.sizeDelta.y / 2 > CursorCanvas.i.region_maxY)
+        if (transform.position.y - cursor_img.rectTransform.sizeDelta.y / 2 > Screen.height)
         {
             Vector2 pos = transform.position;
-            pos.y = CursorCanvas.i.region_minY - cursor_img.rectTransform.sizeDelta.y / 2;
+            pos.y = Screen.height - Screen.width - cursor_img.rectTransform.sizeDelta.y / 2;
             transform.position = pos;
             InputManager.i.OnPointerDownEvent();
         }

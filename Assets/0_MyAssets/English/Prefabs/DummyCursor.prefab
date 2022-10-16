@@ -111,5 +111,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor_img: {fileID: 2449221269682476682}
-  magnitude_range: {x: 5, y: 25}
+  magnitude_range: {x: 5, y: 30}
   direction: {x: 0, y: 0}

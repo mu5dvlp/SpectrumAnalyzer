@@ -60,8 +60,8 @@ public class CursorCanvas : MonoBehaviour
     Vector2 GetRandomCursorPosition()
     {
         Vector2 pos = new Vector2();
-        pos.x = Random.Range(region_minX - realCursor.cursor_img.rectTransform.sizeDelta.x / 2, region_maxX + realCursor.cursor_img.rectTransform.sizeDelta.x / 2);
-        pos.y = Random.Range(region_minY - realCursor.cursor_img.rectTransform.sizeDelta.y / 2, region_maxY + realCursor.cursor_img.rectTransform.sizeDelta.y / 2);
+        pos.x = Random.Range(-realCursor.cursor_img.rectTransform.sizeDelta.x / 2, Screen.width + realCursor.cursor_img.rectTransform.sizeDelta.x / 2);
+        pos.y = Random.Range(Screen.height - Screen.width - realCursor.cursor_img.rectTransform.sizeDelta.y / 2, Screen.height + realCursor.cursor_img.rectTransform.sizeDelta.y / 2);
         return pos;
     }
 

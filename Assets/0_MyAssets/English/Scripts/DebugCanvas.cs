@@ -34,11 +34,11 @@ public class DebugCanvas : MonoBehaviour
     void Update()
     {
 #if UNITY_EDITOR
-        isBtnPushed_array[0] = Input.GetKey(KeyCode.Alpha1);
-        isBtnPushed_array[1] = Input.GetKey(KeyCode.Alpha2);
-        isBtnPushed_array[2] = Input.GetKey(KeyCode.Alpha3);
-        isBtnPushed_array[3] = Input.GetKey(KeyCode.Alpha4);
-        CheckOpenDebug();
+        // isBtnPushed_array[0] = Input.GetKey(KeyCode.Alpha1);
+        // isBtnPushed_array[1] = Input.GetKey(KeyCode.Alpha2);
+        // isBtnPushed_array[2] = Input.GetKey(KeyCode.Alpha3);
+        // isBtnPushed_array[3] = Input.GetKey(KeyCode.Alpha4);
+        // CheckOpenDebug();
 #endif
     }
 
